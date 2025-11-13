@@ -1,12 +1,13 @@
-fetch('/images')
+fetch('/imagenes')
   .then(res => res.json())
   .then(data => {
-    const gallery = document.getElementById('gallery');
-    data.forEach(item => {
-      const img = document.createElement('img');
-      img.src = item.url;  // tu campo de Cloudinary
-      img.width = 300;
-      gallery.appendChild(img);
+    const contenedor = document.getElementById('imagenes');
+    data.forEach(img => {
+      const elemento = document.createElement('img');
+      elemento.src = img.url;
+      elemento.alt = img.nombre;
+      elemento.style.width = '300px';
+      elemento.style.margin = '10px';
+      contenedor.appendChild(elemento);
     });
-  })
-  .catch(console.error);
+  });
