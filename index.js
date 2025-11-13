@@ -14,13 +14,12 @@ mongoose
   .catch((err) => console.error("Error de conexión:", err));
 
 // Esquema del documento
-const imagenSchema = new mongoose.Schema({
-  titulo: String,
-  url: String,
+const imageSchema = new mongoose.Schema({
+  nombre: String,
+  url: String
 });
 
-// Modelo
-const Imagen = mongoose.model("Nube1", imagenSchema, "Nube-1");
+const Image = mongoose.model('Image', imageSchema);
 
 // Ruta principal
 app.get("/", (req, res) => {
