@@ -17,9 +17,10 @@ mongoose
 const imageSchema = new mongoose.Schema({
   nombre: String,
   url: String
-});
+}, { collection: 'Nube-1' }); // 👈 Esto fuerza a usar tu colección real
 
 const Image = mongoose.model('Image', imageSchema);
+
 
 // Ruta principal
 app.get("/", (req, res) => {
