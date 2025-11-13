@@ -26,7 +26,7 @@ const Imagen = mongoose.model("Nube1", imagenSchema, "Nube-1");
 app.get("/", (req, res) => {
   res.send("Servidor conectado correctamente con MongoDB Atlas y Cloudinary!");
 });
-
+//
 // Ruta para obtener imágenes
 app.get("/api/images", async (req, res) => {
   try {
