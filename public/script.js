@@ -6,6 +6,11 @@ async function cargarImagenes() {
     const contenedor = document.getElementById('imagenes');
     contenedor.innerHTML = '';
 
+    if (data.length === 0) {
+      contenedor.innerHTML = '<p>No hay imágenes disponibles.</p>';
+      return;
+    }
+
     data.forEach(img => {
       const div = document.createElement('div');
       div.innerHTML = `
