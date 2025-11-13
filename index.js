@@ -1,29 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const { MongoClient } = require('mongodb');
-const path = require('path');
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
-app.use(express.static('public'));
+app.use(cors());
+app.use(express.static("public"));
 
-const client = new MongoClient(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Conectado a MongoDB Atlas"))
+  .catch(err => console.error("❌ Error en la conexión:", err));
 
-async function getImages() {
-  await client.connect();
-  const db = client.db("BD-Nube-Lidia");
-  const collection = db.collection("nube1");
-  return await collection.find({}).toArray();
-}
+const Imagen = mongoose.model("Imagen", new mongoose.Schema({
+  nombre: String,
+  url: String
+}));
 
-app.get('/images', async (req, res) => {
-  try {
-    const images = await getImages();
-    res.json(images);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
+app.get("/imagenes", async (req, res) => {
+  const imgs = await Imagen.find();
+  res.json(imgs);
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server running");
-});
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log('Servidor en puerto ${port}'));
