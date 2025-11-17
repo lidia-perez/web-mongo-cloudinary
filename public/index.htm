@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Imágenes desde MongoDB</title>
+</head>
+<body>
+  <h1>Galería UAS</h1>
+  <div id="imagenes"></div>
+
+  <script>
+    fetch("/api/images")
+      .then(res => res.json())
+      .then(data => {
+        const div = document.getElementById("imagenes");
+        data.forEach(img => {
+          div.innerHTML += `<h3>${img.nombre}</h3><img src="${img.url}" width="300">`;
+        });
+      })
+      .catch(err => {
+        document.getElementById("imagenes").innerText = "Error cargando imágenes";
+      });
+  </script>
+</body>
+</html>
